@@ -1,0 +1,17 @@
+{
+    "name": "sgb/yunxin",
+    "description": "网易云im聊天",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "chenrj",
+            "email": "729921697@qq.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "yunxin\\": "src"
+        }
+    }
+}
