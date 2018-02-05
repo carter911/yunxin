@@ -662,7 +662,7 @@ class yunxin{
      * @param  $custom      [自定义高级群扩展属性，第三方可以跟据此属性自定义扩展自己的群属性。（建议为json）,最大长度1024字节.]
      * @return $result      [返回array数组对象]
      */
-    public function createGroup($tname,$owner,$members,$announcement='',$intro='',$msg='',$magree='0',$joinmode='0',$custom='0'){
+    public function createGroup($tname,$owner,$members,$announcement='',$intro='',$msg='',$magree='0',$joinmode='0',$custom=''){
         $url = 'https://api.netease.im/nimserver/team/create.action';
         $data= array(
             'tname' => $tname,
@@ -691,16 +691,18 @@ class yunxin{
      * @param  $magree      [管理后台建群时，0不需要被邀请人同意加入群，1需要被邀请人同意才可以加入群。其它会返回414。]
      * @param  $joinmode    [群建好后，sdk操作时，0不用验证，1需要验证,2不允许任何人加入。其它返回414]
      * @param  $custom      [自定义高级群扩展属性，第三方可以跟据此属性自定义扩展自己的群属性。（建议为json）,最大长度1024字节.]
+     * @param  $attach      [扩展字段]
      * @return $result      [返回array数组对象]
      */
-    public function addIntoGroup($tid,$owner,$members,$magree='0',$msg='请您入伙'){
+    public function addIntoGroup($tid,$owner,$members,$magree='0',$msg='请您入伙',$attach=''){
         $url = 'https://api.netease.im/nimserver/team/add.action';
         $data= array(
             'tid' => $tid,
             'owner' => $owner,
             'members' => json_encode($members),
             'magree' => $magree,
-            'msg' => $msg
+            'msg' => $msg,
+            'attach' => $attach
         );
         if($this->RequestType=='curl'){
             $result = $this->postDataCurl($url,$data);
@@ -715,14 +717,16 @@ class yunxin{
      * @param  $tid       [云信服务器产生，群唯一标识，创建群时会返回，最大长度128字节]
      * @param  $owner       [群主用户帐号，最大长度32字节]
      * @param  $member     [被移除人得accid，用户账号，最大长度字节]
+     * @param  $ext        [扩展字段]
      * @return $result      [返回array数组对象]
      */
-    public function kickFromGroup($tid,$owner,$member){
+    public function kickFromGroup($tid,$owner,$member,$ext=""){
         $url = 'https://api.netease.im/nimserver/team/kick.action';
         $data= array(
             'tid' => $tid,
             'owner' => $owner,
-            'member' => $member
+            'member' => $member,
+            'attach' =>json_encode(['name'=>'dsafdsf'])
         );
         if($this->RequestType=='curl'){
             $result = $this->postDataCurl($url,$data);
@@ -1234,8 +1238,9 @@ class yunxin{
     }
 
     /**
-     * 重新获取推流地址
-     * @param  $cid       [频道ID，32位字符串]
+     * 重新获取推流信息
+     * @param $cid
+     * @return array
      */
     public function channelRefreshAddr($cid){
         $url = 'https://vcloud.163.com/app/address';
