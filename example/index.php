@@ -2,11 +2,10 @@
 
 
 include_once "../vendor/autoload.php";
-$AppKey = 'cb52f0f090b05823e60eea727287bc14';
-$AppSecret = '9179e5f85c8c';
+$AppKey = '*************';
+$AppSecret = '*****';
 
 $p = new \yunxin\yunxin($AppKey,$AppSecret,'curl');
-
 //创建云信Id
 //print_r( $p->createUserId('chenrj0011') ) ;
 //更新云信Id
