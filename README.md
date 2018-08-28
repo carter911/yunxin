@@ -1,7 +1,8 @@
 # 网易云im
 
-compoaser
-## 代码
+## 安装
+composer require sgb/yunxin
+## 代码（具体详情看example）
 ~~~
 <?php
 namespace Common\Logic;
