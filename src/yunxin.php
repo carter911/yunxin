@@ -797,9 +797,10 @@ class yunxin
 	 * @param  $intro [群描述，最大长度512字节]
 	 * @param  $joinmode [群建好后，sdk操作时，0不用验证，1需要验证,2不允许任何人加入。其它返回414]
 	 * @param  $custom [自定义高级群扩展属性，第三方可以跟据此属性自定义扩展自己的群属性。（建议为json）,最大长度1024字节.]
+	 * @param  $icon [群头像]
 	 * @return $result      [返回array数组对象]
 	 */
-	public function updateGroup($tid, $owner, $tname, $announcement = '', $intro = '', $joinmode = '0', $custom = '')
+	public function updateGroup($tid, $owner, $tname, $announcement = '', $intro = '', $joinmode = '0', $custom = '',$icon="")
 	{
 		$url  = 'https://api.netease.im/nimserver/team/update.action';
 		$data = array(
@@ -809,7 +810,8 @@ class yunxin
 			'announcement' => $announcement,
 			'intro'        => $intro,
 			'joinmode'     => $joinmode,
-			'custom'       => $custom
+			'custom'       => $custom,
+			'icon'         => $icon
 		);
 		if ($this->RequestType == 'curl') {
 			$result = $this->postDataCurl($url, $data);
